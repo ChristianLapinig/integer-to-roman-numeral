@@ -1,0 +1,22 @@
+{
+  "name": "integer-to-roman-numeral",
+  "version": "1.0.0",
+  "description": "Integer to Roman Numeral converter",
+  "main": "index.js",
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChristianLapinig/integer-to-roman-numeral.git"
+  },
+  "keywords": [
+    "nodejs",
+    "typescript"
+  ],
+  "author": "Christian Lapinig",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ChristianLapinig/integer-to-roman-numeral/issues"
+  },
+  "homepage": "https://github.com/ChristianLapinig/integer-to-roman-numeral#readme"
+}
