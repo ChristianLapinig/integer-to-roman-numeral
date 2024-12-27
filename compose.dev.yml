@@ -3,6 +3,7 @@ services:
     volumes:
       - /app
       - ./backend:/app
+      # - backend-ignore:/app/node_modules
     container_name: integer-to-roman-backend
     restart: unless-stopped
     build:
@@ -11,7 +12,12 @@ services:
     working_dir: /app
     ports:
       - 8081:8081
+    networks:
+      - public
   frontend:
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
     container_name: integer-to-roman-frontend
     build:
       context: frontend
@@ -19,4 +25,12 @@ services:
     working_dir: /app
     ports:
       - 8080:8080
-
+    depends_on:
+      - backend
+    networks:
+      - public
+# volumes:
+#   backend-ignore:
+networks:
+  public:
+  private:

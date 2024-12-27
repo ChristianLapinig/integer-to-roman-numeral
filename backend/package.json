@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "npx tsc",
-    "start:dev": "node dist/index.js",
+    "start:dev": "nodemon -e ts --exec \"npm run build && node dist/index.js\"",
     "start:watch": "nodemon src/index.ts"
   },
   "repository": {
@@ -24,10 +24,13 @@
   },
   "homepage": "https://github.com/ChristianLapinig/integer-to-roman-numeral#readme",
   "dependencies": {
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "@types/node": "^22.10.2",
     "nodemon": "^3.1.9",
