@@ -1,0 +1,37 @@
+{
+  "name": "integer-to-roman-numeral-backend",
+  "version": "1.0.0",
+  "description": "Backend to integer-to-roman-numeral application",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "npx tsc",
+    "start": "node dist/index.js",
+    "dev": "nodemon src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChristianLapinig/integer-to-roman-numeral.git"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "typescript"
+  ],
+  "author": "Christian Lapinig",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ChristianLapinig/integer-to-roman-numeral/issues"
+  },
+  "homepage": "https://github.com/ChristianLapinig/integer-to-roman-numeral#readme",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.10.2",
+    "nodemon": "^3.1.9",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.2"
+  }
+}
