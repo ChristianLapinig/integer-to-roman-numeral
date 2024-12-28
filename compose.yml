@@ -1,0 +1,19 @@
+services:
+  backend:
+    container_name: integer-to-roman-backend
+    build:
+      context: backend 
+      target: production
+      dockerfile: ./Dockerfile
+    ports:
+      - 8081:8081
+  frontend:
+    container_name: integer-to-roman-frontend
+    build:
+      context: frontend
+      dockerfile: ./Dockerfile
+    environment:
+      - NODE_ENV=production
+      - VITE_API_URI=http://localhost:8081
+    ports:
+      - 3000:3000 
