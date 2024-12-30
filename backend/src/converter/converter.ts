@@ -25,6 +25,9 @@ const SYMBOLS: any = {
  * 
  * 3. Repeat steps 1 and 2 until the given input is <= 0. 
  * 
+ * Constraints:
+ * 1 <= parseInt(val) <= 3999
+ * 
  * Source: https://www.rapidtables.com/convert/number/how-number-to-roman-numerals.html
  * 
  * @param val 

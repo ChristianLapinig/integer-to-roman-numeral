@@ -24,4 +24,8 @@ describe("testing integer to roman converter", () => {
 	test("abc returns an error", () => {
 		expect(integerToRoman("abc").err).toBe("Invalid input. Must be a positive whole number");
 	});
+
+	test("ab200cd returns an error", () => {
+		expect(integerToRoman("ab200cd").err).toBe("Invalid input. Must be a positive whole number");
+	});
 });
