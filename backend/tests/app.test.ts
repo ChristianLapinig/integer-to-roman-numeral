@@ -27,6 +27,13 @@ describe("test /romannumeral endpoint", () => {
 		expect(res.body.err).toBe("Invalid input. Must be a positive whole number");
 	});
 
+	test("?query=ab20cd returns an error message", async () => {
+		const res = await requestWithSuperTest.get("/romannumeral?query=ab20cd");
+		expect(res.status).toEqual(400);
+		expect(res.body).toHaveProperty("err");
+		expect(res.body.err).toBe("Invalid input. Must be a positive whole number");
+	});
+
 	test ("/romannumeral should return an error message", async () => {
 		const res = await requestWithSuperTest.get("/romannumeral");
 		expect(res.status).toEqual(400);

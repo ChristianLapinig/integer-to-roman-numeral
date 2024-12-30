@@ -31,14 +31,14 @@ app.get("/romannumeral", (req: Request, res: Response) => {
 		return;
 	}
 
-	const { output, err } = integerToRoman(req.query.query);
+	const { input, output, err } = integerToRoman(req.query.query);
 
 	if (err && err.length > 0) {
 		res.status(400).json({ err });
 		return;
 	}
 
-	res.status(200).json({ ...output });
+	res.status(200).json({ input, output });
 });
 
 export { app };
