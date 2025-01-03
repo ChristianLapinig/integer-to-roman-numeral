@@ -1,14 +1,15 @@
 import { useState, useEffect, FormEvent } from "react";
 
 import useRomanNumeral from "./useRomanNumeral"; 
+import useError from "./useError";
 
 const API_URI = import.meta.env.VITE_API_URI;
 
-export default function useConverterForm() {
+export default function useRomanNumeralForm() {
 	const { setRomanNumeral } = useRomanNumeral();
+	const { setError, setShowErr } = useError();
 	const [value, setValue] = useState<string | null>("");
 	const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-	const [error, setError] = useState<string | null>(null);
 
 	useEffect(() => {
 		// set state of value on mount if the url 
@@ -27,6 +28,7 @@ export default function useConverterForm() {
 			if (!res.ok) {
 				console.error(`[ERROR] ${json.err}`);
 				setError(json.err); 
+				setShowErr(true);
 			} else {
 				console.log(`[INFO] Successful conversion - input: ${json.input}, roman numeral: ${json.output}`);
 				setRomanNumeral(json.output);
@@ -39,6 +41,7 @@ export default function useConverterForm() {
 		} catch (err) {
 			console.error(`[ERROR] ${err}`);
 			setError("An error occurred. Sorry for the inconvenience.");
+			setShowErr(true);
 		}
 	}
 
@@ -65,7 +68,6 @@ export default function useConverterForm() {
 		handleChange, 
 		handleSubmit,
 		isSubmitting,
-		error,
 	};
 }
 
