@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "description": "Integer to Roman Numeral converter",
   "main": "index.js",
-  "scripts": {
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ChristianLapinig/integer-to-roman-numeral.git"
