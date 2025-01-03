@@ -40,12 +40,16 @@ export default function integerToRoman(val: any): {
 } {
 	let num: number = parseInt(val);
 
+	// Must be a valid number
 	if (isNaN(num)) {
 		return {
 			err: "Invalid input. Must be a positive whole number",
 		};
 	}
 
+	// 1 is the smallest roman numeral that can be expressed
+	// 3999 is the highest roman numeral that can be expressed
+	// source: https://en.wikipedia.org/wiki/Roman_numerals
 	if (num < 1 || num > 3999) {
 		return {
 			err: "Input out of range. Must be inbetween 1 and 3999",
@@ -54,9 +58,10 @@ export default function integerToRoman(val: any): {
 
 	let output: string = "";
 	
-	// Rule #1, find the highest decimal from SYMBOLS 
+	// Rule #1, find the highest value from SYMBOLS that fits into
+	// the current remainder.
 	Object.keys(SYMBOLS).forEach((key) => {
-		// Rule #3 has been fulfilled
+		// Input has been fully processed
 		if (num <= 0) {
 			return;
 		}
