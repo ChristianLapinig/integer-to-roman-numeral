@@ -1,27 +1,15 @@
-import { 
-  defaultTheme, 
-  Provider, 
-} from "@adobe/react-spectrum";
-
-import { RomanNumeralProvider } from "./context/RomanNumeralContext";
-import { ErrorProvider } from "./context/ErrorContext";
-import RomanNumeralForm from "./components/RomanNumeralForm";
-import RomanNumeral from "./components/RomanNumeral";
-import ErrorDialog from "./components/ErrorDialog";
+import { ErrorProvider, ColorSchemeProvider, RomanNumeralProvider } from "./context";
+import ComposeProviders from "./components/ComposeProviders";
+import AppProvider from "./components/AppProvider";
 import './App.css';
+
+const providers = [ErrorProvider, ColorSchemeProvider, RomanNumeralProvider];
 
 function App() {
   return (
-    <ErrorProvider>
-      <RomanNumeralProvider>
-        <Provider theme={defaultTheme} >
-          <h1>Integer to Roman Numeral Converter</h1>
-          <RomanNumeralForm />
-          <RomanNumeral />
-          <ErrorDialog />
-        </Provider>
-      </RomanNumeralProvider>
-    </ErrorProvider>
+    <ComposeProviders providers={providers}>
+      <AppProvider />
+    </ComposeProviders>
   );
 }
 
