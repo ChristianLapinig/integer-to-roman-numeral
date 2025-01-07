@@ -1,5 +1,5 @@
 # Build step
-FROM node:18-alpine as build
+FROM node:18-alpine AS build
 
 WORKDIR /app
 
@@ -12,7 +12,7 @@ COPY . .
 RUN npm run build
 
 # Production step
-FROM node:18-alpine as production 
+FROM node:18-alpine AS production 
 
 WORKDIR /app
 
@@ -22,4 +22,4 @@ RUN npm ci --only=production
 
 COPY --from=build /app/dist ./dist
 
-CMD ["npm", "start"]
+CMD ["node", "dist/index.js"]

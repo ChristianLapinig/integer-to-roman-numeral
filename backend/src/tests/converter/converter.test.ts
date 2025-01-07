@@ -1,4 +1,4 @@
-import integerToRoman  from "../../src/converter/converter";
+import integerToRoman  from "../../converter/converter";
 
 describe("testing integer to roman converter", () => {
 	test("3749 converts to MMMDCCXLIX", () => {

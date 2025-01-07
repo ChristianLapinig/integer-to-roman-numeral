@@ -8,7 +8,7 @@ const API_URI = import.meta.env.VITE_API_URI;
 export default function useRomanNumeralForm() {
 	const { setRomanNumeral } = useRomanNumeral();
 	const { setError, setShowErr } = useError();
-	const [value, setValue] = useState<string | null>("");
+	const [value, setValue] = useState<string | undefined>("");
 	const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
 	useEffect(() => {
@@ -16,12 +16,12 @@ export default function useRomanNumeralForm() {
 		// includes /romannumeral?query={value}
 		if (window.location.search.length > 0) {
 			const params = new URLSearchParams(window.location.search);
-			const queryValue = params.get("query");
+			const queryValue = params.get("query") || undefined;
 			setValue(queryValue);
 		}
 	}, []);
 
-	const convertToRomanNumeral = async (value: string | null) => {
+	const convertToRomanNumeral = async (value: string | undefined) => {
 		try {
 			const res = await fetch(`${API_URI}/romannumeral?query=${value}`);
 			const json = await res.json();
