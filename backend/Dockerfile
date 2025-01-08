@@ -1,5 +1,5 @@
 # Build step
-FROM node:18-alpine as build
+FROM node:18-alpine AS build
 
 WORKDIR /app
 
@@ -11,8 +11,21 @@ COPY . .
 
 RUN npm run build
 
+# Test step 
+FROM node:18-alpine AS test
+
+WORKDIR /app
+
+COPY package*.json .
+
+RUN npm install
+
+COPY . .
+
+RUN npm run test 
+
 # Production step
-FROM node:18-alpine as production 
+FROM node:18-alpine AS production 
 
 WORKDIR /app
 

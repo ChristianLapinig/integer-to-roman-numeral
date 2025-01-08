@@ -1,14 +1,44 @@
 services:
+  prometheus:
+    image: prom/prometheus
+    container_name: integer-to-roman-prometheus-prod
+    volumes:
+      - ./prometheus:/etc/prometheus
+      - prometheus:/prometheus
+    ports:
+      - 9090:9090
+    expose:
+      - 9090
+    networks:
+      - monitoring
+  grafana:
+    image: grafana/grafana
+    container_name: integer-to-roman-grafana-prod
+    ports:
+      - 9000:3000 
+    depends_on:
+      - prometheus
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - grafana:/var/lib/grafana
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    networks:
+      - monitoring
   backend:
-    container_name: integer-to-roman-backend
+    image: integer-to-roman-backend-prod
+    container_name: integer-to-roman-backend-prod
     build:
       context: backend 
       target: production
       dockerfile: ./Dockerfile
     ports:
       - 8081:8081
+    networks:
+      - monitoring
   frontend:
-    container_name: integer-to-roman-frontend
+    image: integer-to-roman-frontend-prod
+    container_name: integer-to-roman-frontend-prod
     build:
       context: frontend
       dockerfile: ./Dockerfile
@@ -17,3 +47,14 @@ services:
       - VITE_API_URI=http://localhost:8081
     ports:
       - 3000:3000 
+    networks:
+      - monitoring
+volumes:
+#   backend-ignore:
+  prometheus:
+  grafana:
+networks:
+  # public:
+  # private:
+  monitoring:
+    driver: bridge

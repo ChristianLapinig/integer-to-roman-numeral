@@ -4,7 +4,7 @@
   "description": "Backend to integer-to-roman-numeral application",
   "main": "dist/index.js",
   "scripts": {
-    "build": "npx tsc",
+    "build": "rm -rf ./dist && tsc",
     "test": "jest",
     "start": "node dist/index.js",
     "start:dev": "nodemon -e ts --exec \"npm run build && node dist/index.js\"",
@@ -29,7 +29,8 @@
     "body-parser": "^1.20.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
-    "express": "^4.21.2"
+    "express": "^4.21.2",
+    "express-prom-bundle": "^8.0.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
