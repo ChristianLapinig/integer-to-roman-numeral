@@ -11,6 +11,19 @@ COPY . .
 
 RUN npm run build
 
+# Test step 
+FROM node:18-alpine AS test
+
+WORKDIR /app
+
+COPY package*.json .
+
+RUN npm install
+
+COPY . .
+
+RUN npm run test 
+
 # Production step
 FROM node:18-alpine AS production 
 
@@ -22,4 +35,4 @@ RUN npm ci --only=production
 
 COPY --from=build /app/dist ./dist
 
-CMD ["node", "dist/index.js"]
+CMD ["npm", "start"]
