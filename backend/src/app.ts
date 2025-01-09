@@ -2,8 +2,10 @@ import express, { Express, Request, Response } from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import promBundle from "express-prom-bundle";
+import epxressWinston from "express-winston";
 
 import integerToRoman from "./converter/converter";
+import { loggerOpts, errorLoggerOpts } from "./config/winston";
 
 const app: Express = express(); 
 const metricsMiddleware = promBundle({ 
@@ -21,6 +23,7 @@ app.use(metricsMiddleware);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
+app.use(epxressWinston.logger(loggerOpts))
 
 app.get("/", (req: Request, res: Response) => {
 	res.json({
@@ -51,5 +54,7 @@ app.get("/romannumeral", (req: Request, res: Response) => {
 
 	res.status(200).json({ input, output });
 });
+
+app.use(epxressWinston.errorLogger(errorLoggerOpts));
 
 export { app };
