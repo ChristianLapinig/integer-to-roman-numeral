@@ -1,3 +1,8 @@
+import winston from "winston";
+import { loggerOpts } from "../config/winston";
+
+const logger = winston.createLogger(loggerOpts);
+
 const SYMBOLS: any = {
 	"M": 1000,
 	"CM": 900,
@@ -38,19 +43,21 @@ export default function integerToRoman(val: any): {
 	output?: string,
 	err?: string, 
 } {
+	logger.debug(`attempting to convert ${val} into a roman numeral.`);
 	let num: number = parseInt(val);
 
 	// Must be a valid number
 	if (isNaN(num)) {
-		return {
-			err: "Invalid input. Must be a positive whole number",
-		};
+		const message = `Invalid input ${val}. Must be a positive whole number`;
+		logger.error(message);
+		return { err: message };
 	}
 
 	// 1 is the smallest roman numeral that can be expressed
 	// 3999 is the highest roman numeral that can be expressed
 	// source: https://en.wikipedia.org/wiki/Roman_numerals
 	if (num < 1 || num > 3999) {
+		logger.error(`input ${val} out of range.`);
 		return {
 			err: "Input out of range. Must be inbetween 1 and 3999",
 		};
@@ -71,11 +78,15 @@ export default function integerToRoman(val: any): {
 		while (SYMBOLS[key] <= num) {
 			num -= SYMBOLS[key]; 
 			output += key;
+			logger.debug(`updated roman numeral: ${output}`);
+			logger.debug(`remainder to be processed: ${num}`);
 		}
 	});
+
+	logger.info(`Conversion successful. ${val} converted to ${output}`);
 
 	return {
 		input: val,
 		output,
-	}
+	};
 }
