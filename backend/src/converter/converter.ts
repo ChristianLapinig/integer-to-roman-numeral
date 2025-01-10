@@ -3,7 +3,8 @@ import { loggerOpts } from "../config/winston";
 
 const logger = winston.createLogger(loggerOpts);
 
-const SYMBOLS: any = {
+// Object to represent a table of roman numeral values
+const SYMBOLS: { [symbol: string]: number } = {
 	"M": 1000,
 	"CM": 900,
 	"D": 500,
