@@ -3,7 +3,11 @@ FROM node:18-alpine AS build
 
 WORKDIR /app
 
+RUN pwd
+
 COPY package*.json .
+
+RUN cat package.json
 
 RUN npm ci
 
