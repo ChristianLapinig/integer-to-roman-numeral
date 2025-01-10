@@ -6,12 +6,16 @@ of the Integer to Roman Numeral application.
 1. [Technologies Used](#technologies-used)
 	
 	a. [Frontend: React](#frontend-react)
+
 	b. [Backend: NodeJS/Express](#backend-nodejsexpress)
+
 	c. [Language: Typescript](#language-typescript)
+
 	d. [Testing](#testing)
+
 	e. [DevOps Features](#devops-features)
 
-2.  
+2. [Integer to Roman Numeral Algorithm](#integer-to-roman-numeral-algorithm)
 
 ## Technologies Used
 The following technologies were used to build the application.
