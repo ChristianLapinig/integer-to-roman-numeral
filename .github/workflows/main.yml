@@ -11,13 +11,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        include:
-          - image: integer-to-roman-numeral/frontend
-            dockerfile: frontend/Dockerfile
-          - image: integer-to-roman-numeral/backend
-            dockerfile: backend/Dockerfile
+    permissions:
+      contents: read
+      packages: write
       
     steps:
       - name: Checkout code
@@ -33,17 +29,22 @@ jobs:
         uses: docker/setup-buildx-action@v3
       
       - name: Test Frontend
-        run: cd frontend; npm install; npm test
+        run: cd frontend; npm ci; npm test
 
       - name: Test Backend 
-        run: cd backend; npm install; npm test
+        run: cd backend; npm ci; npm test
       
-      - name: Build and push
+      - name: Build backend
         uses: docker/build-push-action@v6
         with:
-          context: .
-          file: ${{ matrix.dockerfile }}
+          context: backend
           platforms: linux/amd64,linux/arm64
-          push: true
-          # target: prod
-          tags: ${{ vars.DOCKER_USERNAME }}/${{ github.event.repository.name }}:latest
+          tags: ${{ vars.DOCKER_USERNAME }}/${{ github.event.repository.name }}/backend:latest
+
+      - name: Build frontend
+        uses: docker/build-push-action@v6
+        with:
+          context: frontend
+          platforms: linux/amd64,linux/arm64
+          tags: ${{ vars.DOCKER_USERNAME }}/${{ github.event.repository.name }}/frontend:latest
+      

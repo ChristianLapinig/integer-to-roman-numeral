@@ -5,19 +5,19 @@ WORKDIR /app
 
 COPY package*.json .
 
-RUN npm install
+RUN npm ci
 
 COPY . .
 
 RUN npm run test 
 
-FROM node:18-alpine as production
+FROM node:18-alpine AS production
 
 WORKDIR /app
 
 COPY package*.json .
 
-RUN npm install
+RUN npm ci
 
 RUN npm i -g serve
 

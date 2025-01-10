@@ -17,7 +17,7 @@ describe("Test ToggleColorScheme", () => {
 			expect(document.body.className).toBe("light");
 			const { getByTestId } = app;
 			const toggleSwitch = getByTestId("theme-toggle");
-			expect(toggleSwitch.checked).toBe(false);
+			expect((toggleSwitch as HTMLInputElement | null)?.checked).toBe(false);
 		});
 
 		it("toggles color scheme after clicking toggle switch", () => {
@@ -25,7 +25,7 @@ describe("Test ToggleColorScheme", () => {
 			const toggleSwitch = getByTestId("theme-toggle");
 
 			fireEvent.click(toggleSwitch);
-			expect(toggleSwitch.checked).toBe(true);
+			expect((toggleSwitch as HTMLInputElement | null)?.checked).toBe(true);
 			expect(document.body.className).toBe("dark");
 		});
 	});
