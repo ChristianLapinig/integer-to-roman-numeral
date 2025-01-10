@@ -38,11 +38,11 @@ jobs:
       - name: Test Backend 
         run: cd backend; npm ci; npm test
 
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@v4
-        with:
-          images: ${{ matrix.image }}
+      # - name: Extract metadata (tags, labels) for Docker
+      #   id: meta
+      #   uses: docker/metadata-action@v4
+      #   with:
+      #     images: ${{ matrix.image }}
       
       - name: Build and push backend
         uses: docker/build-push-action@v6
