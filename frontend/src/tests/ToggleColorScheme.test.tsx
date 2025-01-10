@@ -16,7 +16,7 @@ describe("Test ToggleColorScheme", () => {
 		it("shows light theme by default", () => {
 			expect(document.body.className).toBe("light");
 			const { getByTestId } = app;
-			const toggleSwitch = getByTestId("theme-toggle");
+			const toggleSwitch: any = getByTestId("theme-toggle");
 			expect(toggleSwitch.checked).toBe(false);
 		});
 
