@@ -9,6 +9,5 @@ The conversion of user input adheres to the following [rules](https://www.rapidt
 roman numeral.
 
 ## Todo
-
-- Add logging to backend service
+- Add frontend tests
 - Add CI via GitHub Actions
