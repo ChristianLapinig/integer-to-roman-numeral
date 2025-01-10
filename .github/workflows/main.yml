@@ -11,13 +11,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    # strategy:
-    #   matrix:
-    #     include:
-    #       - image: integer-to-roman-numeral/frontend
-    #         dockerfile: frontend/Dockerfile
-    #       - image: integer-to-roman-numeral/backend
-    #         dockerfile: backend/Dockerfile
+    strategy:
+      matrix:
+        include:
+          - image: integer-to-roman-numeral/frontend
+            dockerfile: frontend/Dockerfile
+          - image: integer-to-roman-numeral/backend
+            dockerfile: backend/Dockerfile
       
     steps:
       - name: Checkout code
