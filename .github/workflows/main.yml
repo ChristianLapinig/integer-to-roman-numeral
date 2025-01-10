@@ -11,13 +11,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        include:
-          - image: integer-to-roman-numeral/frontend
-            dockerfile: frontend/Dockerfile
-          - image: integer-to-roman-numeral/backend
-            dockerfile: backend/Dockerfile
+    # strategy:
+    #   matrix:
+    #     include:
+    #       - image: integer-to-roman-numeral/frontend
+    #         dockerfile: frontend/Dockerfile
+    #       - image: integer-to-roman-numeral/backend
+    #         dockerfile: backend/Dockerfile
       
     steps:
       - name: Checkout code
@@ -37,18 +37,21 @@ jobs:
 
       - name: Test Backend 
         run: cd backend; npm ci; npm test
-
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@v4
-        with:
-          images: ${{ matrix.image }}
       
-      - name: Build and push
+      - name: Build and push frontend
         uses: docker/build-push-action@v6
         with:
-          context: .
-          file: ${{ matrix.dockerfile }}
+          context: frontend 
+          file: Dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ${{ vars.DOCKER_USERNAME }}/${{ github.event.repository.name }}:latest
+          tags: ${{ vars.DOCKER_USERNAME }}/${{ github.event.repository.name }}/frontend:latest
+
+      - name: Build and push backend
+        uses: docker/build-push-action@v6
+        with:
+          context: backend
+          file: Dockerfile
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ vars.DOCKER_USERNAME }}/${{ github.event.repository.name }}/backend:latest
