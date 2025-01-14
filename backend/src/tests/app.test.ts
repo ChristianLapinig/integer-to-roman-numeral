@@ -35,6 +35,12 @@ describe("test express app", () => {
 			expect(res.body).toHaveProperty("err");
 			expect(res.body.err).toBe(ERR_INVALID_INPUT_NAN);
 		});
+
+		test("POST method should not be allowed", async () => {
+			const res = await requestWithSuperTest.post("/romannumeral?query=ab20cd");
+			expect(res.status).toEqual(405);
+			expect(res.body.err).toBe("POST not accepted");
+		});
 	});
 
 	describe("test 404", () => {

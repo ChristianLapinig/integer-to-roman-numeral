@@ -53,6 +53,8 @@ app.get("/romannumeral", (req: Request, res: Response) => {
 	}
 
 	res.status(200).json({ input, output });
+}).all("/romannumeral", (req: Request, res: Response) => {
+	res.status(405).json({ err: `${req.method} not accepted`});
 });
 
 app.use(epxressWinston.errorLogger(errorLoggerOpts));
