@@ -31,7 +31,7 @@ services:
     volumes:
       - /app
       - ./backend:/app
-      # - backend-ignore:/app/node_modules
+      - backend-ignore:/app/node_modules
     image: integer-to-roman-backend-dev
     container_name: integer-to-roman-backend-dev
     restart: unless-stopped
@@ -55,12 +55,14 @@ services:
     working_dir: /app
     ports:
       - 8080:8080
+    environment:
+      - VITE_API_URI=http://localhost:8081
     depends_on:
       - backend
     networks:
       - monitoring 
 volumes:
-#   backend-ignore:
+  backend-ignore:
   prometheus:
   grafana:
 networks:
