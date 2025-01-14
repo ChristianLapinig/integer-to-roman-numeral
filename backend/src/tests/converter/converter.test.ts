@@ -30,6 +30,10 @@ describe("testing integer to roman converter", () => {
 		expect(integerToRoman("5.5").err).toBe(ERR_INVALID_INPUT_NAN);
 	});
 
+	test("10,5 returns an error", () => {
+		expect(integerToRoman("10,5").err).toBe(ERR_INVALID_INPUT_NAN);
+	});
+
 	test("abc returns an error", () => {
 		expect(integerToRoman("abc").err).toBe(ERR_INVALID_INPUT_NAN);
 	});
