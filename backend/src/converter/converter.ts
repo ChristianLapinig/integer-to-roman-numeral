@@ -51,7 +51,7 @@ export default function integerToRoman(val: any): {
 	let num: number = parseInt(val);
 
 	// Must be a valid number whole number
-	if (isNaN(num) || parseFloat(val) % 1 !== 0) {
+	if (isNaN(num) || parseFloat(val) % 1 !== 0 || val.match(/[^a-zA-Z0-9-]/) !== null) {
 		return { err: ERR_INVALID_INPUT_NAN };
 	}
 
