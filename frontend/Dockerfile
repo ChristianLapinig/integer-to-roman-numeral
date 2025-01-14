@@ -13,6 +13,8 @@ RUN npm run test
 
 FROM node:18-alpine AS production
 
+ENV VITE_API_URI=http://localhost:8081
+
 WORKDIR /app
 
 COPY package*.json .
