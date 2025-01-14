@@ -52,6 +52,7 @@ export default function integerToRoman(val: any): {
 
 	// Must be a valid number whole number
 	if (isNaN(num) || parseFloat(val) % 1 !== 0 || val.match(/[^a-zA-Z0-9-]/) !== null) {
+		logger.error(`input ${val} is not a positive whole number.`);
 		return { err: ERR_INVALID_INPUT_NAN };
 	}
 
