@@ -28,7 +28,7 @@ app.use(epxressWinston.logger(loggerOpts))
 app.get("/", (req: Request, res: Response) => {
 	res.json({
 		"title": "Integer to Roman numeral service",
-		"description": "Backend service for converting integers to roman numerals",
+		"description": "Backend service for converting integers to a roman numeral",
 	});
 });
 
