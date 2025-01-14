@@ -126,10 +126,10 @@ $ docker compose -f compose.dev.yml up --build
 
 Where you can find these containers running:
 
-1. React UI running on `http://localhost:8080` for dev, `http://localhost:3000` for production.
+1. React UI running on `http://localhost:8080`.
 2. Backend running at `http://localhost:8081`
 3. Promethus for monitoring at `http://localhost:9090`
-4. Grafana for observability at `http://localhost:3000` for dev, `http://localhost:9000` for production.
+4. Grafana for observability at `http://localhost:3000`.
 
 ## Testing
 Tests can be run via `npm` or `docker compose`
