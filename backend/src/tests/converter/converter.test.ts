@@ -1,4 +1,5 @@
-import integerToRoman  from "../../converter/converter";
+import integerToRoman from "../../converter/converter";
+import { ERR_INVALID_INPUT_NAN, ERR_INVALID_INPUT_OUT_OF_RANGE } from "../../constants"; 
 
 describe("testing integer to roman converter", () => {
 	test("3749 converts to MMMDCCXLIX", () => {
@@ -14,18 +15,26 @@ describe("testing integer to roman converter", () => {
 	});
 
 	test("4000 returns an error", () => {
-		expect(integerToRoman("4000").err).toBe("Input out of range. Must be inbetween 1 and 3999");
+		expect(integerToRoman("4000").err).toBe(ERR_INVALID_INPUT_OUT_OF_RANGE);
 	});
 
 	test("0 returns an error", () => {
-		expect(integerToRoman("0").err).toBe("Input out of range. Must be inbetween 1 and 3999");
+		expect(integerToRoman("0").err).toBe(ERR_INVALID_INPUT_OUT_OF_RANGE);
+	});
+	
+	test("-5 returns an error", () => {
+		expect(integerToRoman("-5").err).toBe(ERR_INVALID_INPUT_OUT_OF_RANGE);
+	});
+
+	test("5.5 returns an error", () => {
+		expect(integerToRoman("5.5").err).toBe(ERR_INVALID_INPUT_NAN);
 	});
 
 	test("abc returns an error", () => {
-		expect(integerToRoman("abc").err).toBe("Invalid input abc. Must be a positive whole number");
+		expect(integerToRoman("abc").err).toBe(ERR_INVALID_INPUT_NAN);
 	});
 
 	test("ab200cd returns an error", () => {
-		expect(integerToRoman("ab200cd").err).toBe("Invalid input ab200cd. Must be a positive whole number");
+		expect(integerToRoman("ab200cd").err).toBe(ERR_INVALID_INPUT_NAN);
 	});
 });
