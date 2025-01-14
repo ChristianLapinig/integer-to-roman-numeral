@@ -1,4 +1,6 @@
 import winston from "winston";
+
+import { ERR_INVALID_INPUT_NAN, ERR_INVALID_INPUT_OUT_OF_RANGE } from "../constants";
 import { loggerOpts } from "../config/winston";
 
 const logger = winston.createLogger(loggerOpts);
@@ -45,13 +47,12 @@ export default function integerToRoman(val: any): {
 	err?: string, 
 } {
 	logger.debug(`attempting to convert ${val} into a roman numeral.`);
+
 	let num: number = parseInt(val);
 
-	// Must be a valid number
-	if (isNaN(num)) {
-		const message = `Invalid input ${val}. Must be a positive whole number`;
-		logger.error(message);
-		return { err: message };
+	// Must be a valid number whole number
+	if (isNaN(num) || parseFloat(val) % 1 !== 0) {
+		return { err: ERR_INVALID_INPUT_NAN };
 	}
 
 	// 1 is the smallest roman numeral that can be expressed
@@ -60,7 +61,7 @@ export default function integerToRoman(val: any): {
 	if (num < 1 || num > 3999) {
 		logger.error(`input ${val} out of range.`);
 		return {
-			err: "Input out of range. Must be inbetween 1 and 3999",
+			err: ERR_INVALID_INPUT_OUT_OF_RANGE,
 		};
 	}
 
