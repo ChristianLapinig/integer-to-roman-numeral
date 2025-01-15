@@ -41,6 +41,11 @@ app.get("/test", (req: Request, res: Response) => {
 
 app.route("/romannumeral")
 	.get((req: Request, res: Response) => {
+		if (req.headers.accept !== undefined && !req.headers.accept?.includes("application/json")) {
+			res.status(406).json({ err: `Accept header ${JSON.stringify(req.headers.accept)} not supported` });
+			return;
+		}
+
 		if (req.query.query === undefined || req.query === undefined) {
 			res.status(400).json({ err: "No input passed" });
 			return;
@@ -52,7 +57,6 @@ app.route("/romannumeral")
 			res.status(400).json({ err });
 			return;
 		}
-
 
 		res.status(200).json({ input, output });
 	})
