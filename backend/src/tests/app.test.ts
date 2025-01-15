@@ -41,6 +41,13 @@ describe("test express app", () => {
 			expect(res.status).toEqual(405);
 			expect(res.body.err).toBe("POST not accepted");
 		});
+
+		test("header accept: application/xml should throw a 406", async () => {
+			const res = await requestWithSuperTest
+				.get("/romannumeral?query=5")
+				.set({ "accept": "application/xml" });
+			expect(res.status).toEqual(406);
+		});
 	});
 
 	describe("test 404", () => {
