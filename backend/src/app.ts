@@ -39,23 +39,30 @@ app.get("/test", (req: Request, res: Response) => {
 	});
 });
 
-app.get("/romannumeral", (req: Request, res: Response) => {
-	if (req.query.query === undefined) {
-		res.status(400).json({ err: "No input passed" });
-		return;
-	}
+app.route("/romannumeral")
+	.get((req: Request, res: Response) => {
+		if (req.headers.accept !== undefined && !req.headers.accept?.includes("application/json")) {
+			res.status(406).json({ err: `Accept header ${JSON.stringify(req.headers.accept)} not supported` });
+			return;
+		}
 
-	const { input, output, err } = integerToRoman(req.query.query);
+		if (req.query.query === undefined || req.query === undefined) {
+			res.status(400).json({ err: "No input passed" });
+			return;
+		}
 
-	if (err && err.length > 0) {
-		res.status(400).json({ err });
-		return;
-	}
+		const { input, output, err } = integerToRoman(req.query.query);
 
-	res.status(200).json({ input, output });
-}).all("/romannumeral", (req: Request, res: Response) => {
-	res.status(405).json({ err: `${req.method} not accepted`});
-});
+		if (err && err.length > 0) {
+			res.status(400).json({ err });
+			return;
+		}
+
+		res.status(200).json({ input, output });
+	})
+	.all((req: Request, res: Response) => {
+		res.status(405).json({ err: `${req.method} not accepted`});
+	});
 
 app.use(epxressWinston.errorLogger(errorLoggerOpts));
 

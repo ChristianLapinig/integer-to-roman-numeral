@@ -46,3 +46,6 @@ lerna-debug.log*
 
 # builds
 dist
+
+# .js test files
+*.test.js
