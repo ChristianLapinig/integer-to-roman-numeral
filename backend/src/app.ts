@@ -39,23 +39,26 @@ app.get("/test", (req: Request, res: Response) => {
 	});
 });
 
-app.get("/romannumeral", (req: Request, res: Response) => {
-	if (req.query.query === undefined) {
-		res.status(400).json({ err: "No input passed" });
-		return;
-	}
+app.route("/romannumeral")
+	.get((req: Request, res: Response) => {
+		if (req.query.query === undefined || req.query === undefined) {
+			res.status(400).json({ err: "No input passed" });
+			return;
+		}
 
-	const { input, output, err } = integerToRoman(req.query.query);
+		const { input, output, err } = integerToRoman(req.query.query);
 
-	if (err && err.length > 0) {
-		res.status(400).json({ err });
-		return;
-	}
+		if (err && err.length > 0) {
+			res.status(400).json({ err });
+			return;
+		}
 
-	res.status(200).json({ input, output });
-}).all("/romannumeral", (req: Request, res: Response) => {
-	res.status(405).json({ err: `${req.method} not accepted`});
-});
+
+		res.status(200).json({ input, output });
+	})
+	.all((req: Request, res: Response) => {
+		res.status(405).json({ err: `${req.method} not accepted`});
+	});
 
 app.use(epxressWinston.errorLogger(errorLoggerOpts));
 
