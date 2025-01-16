@@ -41,7 +41,7 @@ app.get("/test", (req: Request, res: Response) => {
 
 app.route("/romannumeral")
 	.get((req: Request, res: Response) => {
-		if (req.headers.accept !== undefined && !req.headers.accept?.includes("application/json")) {
+		if (!req.headers.accept?.includes("application/json")) {
 			res.status(406).json({ err: `Accept header ${JSON.stringify(req.headers.accept)} not supported` });
 			return;
 		}

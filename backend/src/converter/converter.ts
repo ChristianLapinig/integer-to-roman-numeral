@@ -61,9 +61,7 @@ export default function integerToRoman(val: any): {
 	// source: https://en.wikipedia.org/wiki/Roman_numerals
 	if (num < 1 || num > 3999) {
 		logger.error(`input ${val} out of range.`);
-		return {
-			err: ERR_INVALID_INPUT_OUT_OF_RANGE,
-		};
+		return { err: ERR_INVALID_INPUT_OUT_OF_RANGE };
 	}
 
 	let output: string = "";

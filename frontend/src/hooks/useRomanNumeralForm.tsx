@@ -23,7 +23,11 @@ export default function useRomanNumeralForm() {
 
 	const convertToRomanNumeral = async (value: string | undefined) => {
 		try {
-			const res = await fetch(`${API_URI}/romannumeral?query=${value}`);
+			const res = await fetch(`${API_URI}/romannumeral?query=${value}`, {
+				headers: {
+					"accept": "application/json",
+				},
+			});
 			const json = await res.json();
 			if (!res.ok) {
 				console.error(`[ERROR] ${json.err}`);
