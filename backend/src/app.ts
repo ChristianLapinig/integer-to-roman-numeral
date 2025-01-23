@@ -25,6 +25,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use(epxressWinston.logger(loggerOpts))
 
+app.use((req: Request, res: Response, next: () => void) => {
+	res.header("Access-Control-Allow-Origin", "*");
+	next();
+});
+
 app.get("/", (req: Request, res: Response) => {
 	res.json({
 		"title": "Integer to Roman numeral service",
