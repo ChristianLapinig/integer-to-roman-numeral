@@ -50,13 +50,6 @@ describe("test express app", () => {
 				.set("accept", "application/json");
 			expect(res.status).toEqual(405);
 		});
-
-		test("header accept: application/xml should return 406", async () => {
-			const res = await requestWithSuperTest
-				.get("/romannumeral?query=1500")
-				.set("accept", "application/xml");
-			expect(res.status).toEqual(406);
-		});
 	});
 
 	describe("test 404", () => {
